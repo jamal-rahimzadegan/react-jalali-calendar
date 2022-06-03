@@ -207,6 +207,7 @@ function RenderDays(props) {
       style = _useContext.style;
 
   var currentDayBg = style.currentDayBg,
+      dayTextColor = style.dayTextColor,
       holidayText = style.holidayText,
       holidayBg = style.holidayBg,
       currentDayText = style.currentDayText,
@@ -220,12 +221,9 @@ function RenderDays(props) {
   };
 
   var applyDayTxtColor = function applyDayTxtColor(dayInWeek, dayValue) {
-    if (perDate.isToday(year, month, dayValue)) {
-      return todayTxtColor || COLORS.TXT_FIRST;
-    }
-
+    if (perDate.isToday(year, month, dayValue)) return todayTxtColor;
     if (checkIfSelectedDay(dayValue)) return currentDayText || COLORS.TXT_FIRST;
-    if (perDate.isFriday(dayInWeek)) return holidayText || COLORS.HOLIDAY_BG;else return COLORS.TXT_FIRST;
+    if (perDate.isFriday(dayInWeek)) return holidayText || COLORS.HOLIDAY_BG;else return dayTextColor || COLORS.TXT_FIRST;
   };
 
   var applyBgColor = function applyBgColor(dayValue, dayInWeek) {
@@ -286,7 +284,9 @@ function generateArr(length, formatArr) {
 
 function Calendar(props) {
   var onSelect = props.onSelect,
-      style = props.style;
+      style = props.style,
+      _props$className = props.className,
+      className = _props$className === void 0 ? '' : _props$className;
   var currentDate = perDate.currentDate;
 
   var _useState = React.useState(currentDate.year),
@@ -357,7 +357,7 @@ function Calendar(props) {
   return React__default.createElement(CalenderContext.Provider, {
     value: sharedItems
   }, React__default.createElement(CalenderHeader, null), React__default.createElement("div", {
-    className: styles.calender
+    className: styles.calender + ' ' + className
   }, React__default.createElement("table", null, React__default.createElement("thead", null, React__default.createElement("tr", {
     style: {
       color: style.weekDayNameColor,

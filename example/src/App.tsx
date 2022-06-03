@@ -20,7 +20,10 @@ export default function App() {
         holidayText: 'white',
 
         currentDayBg: 'lime',
-        currentDayText: 'blue'
+        currentDayText: 'blue',
+
+        dayBgColor: 'brown',
+        dayTextColor: 'blue'
       }}
     />
   )

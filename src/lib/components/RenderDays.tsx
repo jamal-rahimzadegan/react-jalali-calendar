@@ -35,12 +35,10 @@ export default function RenderDays(props: Props) {
   }
 
   const applyDayTxtColor = (dayInWeek: number, dayValue: number): string => {
-    if (perDate.isToday(year, month, dayValue)) {
-      return todayTxtColor || COLORS.TXT_FIRST
-    }
+    if (perDate.isToday(year, month, dayValue)) return todayTxtColor
     if (checkIfSelectedDay(dayValue)) return currentDayText || COLORS.TXT_FIRST
     if (perDate.isFriday(dayInWeek)) return holidayText || COLORS.HOLIDAY_BG
-    else return COLORS.TXT_FIRST
+    else return dayTextColor || COLORS.TXT_FIRST
   }
 
   const applyBgColor = (dayValue: number, dayInWeek: number): string => {

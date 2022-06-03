@@ -11,10 +11,11 @@ import styles from './lib/style.module.css'
 interface Props {
   onSelect: (day: DateItem) => void
   style?: StyleObject
+  className?: string
 }
 
 export function Calendar(props: Props): JSX.Element {
-  const { onSelect, style } = props
+  const { onSelect, style, className = '' } = props
   const { currentDate } = perDate
   const [year, setYear] = useState<number>(currentDate.year)
   const [month, setMonth] = useState<number>(currentDate.month.number)
@@ -23,7 +24,7 @@ export function Calendar(props: Props): JSX.Element {
   const selectMethod: DaySelectType = 'single'
   const monthLength: number = perDate.getMonthLength(year, month)
   const firstDayOfMonth: number = perDate.getFirstDayOfMonth(year, month)
-  const calenderRowWeek = firstDayOfMonth > 4 ? 6 : 5 // 0: Saturday, 6: Friday
+  const calenderRowWeek = firstDayOfMonth > 4 ? 6 : 5 // 4 === Wednesday
 
   const generateCalenderWeeks = (): (() => Week[]) => {
     let currentDay: number = 1
@@ -67,7 +68,7 @@ export function Calendar(props: Props): JSX.Element {
   return (
     <CalenderContext.Provider value={sharedItems}>
       <CalenderHeader />
-      <div className={styles.calender}>
+      <div className={styles.calender + ' ' + className}>
         <table>
           <thead>
             <tr
