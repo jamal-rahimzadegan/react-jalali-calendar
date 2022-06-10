@@ -7,22 +7,30 @@
 ## Install
 
 ```bash
-npm install --save react-jalali-calendar
+npm install react-jalali-calendar
+yarn add react-jalali-calendar
 ```
 
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React from 'react'
+import { Calendar } from 'react-jalali-calendar' // import this
+import 'react-jalali-calendar/dist/index.css' // import this
 
-import MyComponent from 'react-jalali-calendar'
-import 'react-jalali-calendar/dist/index.css'
+export default function App() {
+  return (
+    <Calendar
+      onSelect={console.table}
+      style={{
 
-export default function MyComponent() {
-  return <Calendar />
+
+      }}
+    />
+  )
 }
 ```
 
-## License
+## Author
 
-MIT © [Jamal RahimZadegan](https://github.com/jamal-rahimzadegan)
+[Jamal RahimZadegan](https://github.com/jamal-rahimzadegan)

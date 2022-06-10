@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-html, body {
+body {
   transition: background 600ms;
 }
 

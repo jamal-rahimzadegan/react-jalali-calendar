@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import CalenderContext from 'lib/calender-context'
 import { StyledHeader } from './styles'
-import { perDate } from 'tools'
+import { perDate, numberTools } from 'tools'
 
 export default function Header() {
   const { year, month, setMonth, setYear, lookAndFeel } =
     useContext(CalenderContext)
 
-  const changeMonth = (action: MontSwitchType) => {
+  const changeMonth = (action: MonthSwitchType) => {
     if (action === 'prev') {
       if (month >= 2) return setMonth(month - 1)
       else {
@@ -29,7 +29,8 @@ export default function Header() {
     <StyledHeader lookAndFeel={lookAndFeel}>
       <button onClick={() => changeMonth('prev')} children='‹' />
       <p>
-        {perDate.getMonthNameByNumber(month)} {year}
+        {perDate.getMonthNameByNumber(month)}
+        {numberTools.toPersian(year)}
       </p>
       <button onClick={() => changeMonth('next')} children='›' />
     </StyledHeader>

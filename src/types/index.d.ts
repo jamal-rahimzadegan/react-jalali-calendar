@@ -1,4 +1,4 @@
-type MontSwitchType = 'prev' | 'next'
+type MonthSwitchType = 'prev' | 'next'
 
 type DaySelectType = 'single' | 'range'
 
@@ -24,19 +24,22 @@ interface CurrentDate {
 }
 
 interface StyleObject {
-  headTitleColor?: string
-  headBtnColor?: string
-  headBorderColor?: string
-  weekDayNameColor?: string
-  weekDayNameBg?: string
-  dayBgColor?: string
-  dayTextColor?: string
-  currentDayText?: string
-  currentDayBg?: string
-  todayBg?: string
-  todayTxtColor?: string
-  holidayText?: string
-  holidayBg?: string
+  fontFamily?: string
+  colors: {
+    headTitleColor?: string
+    headBtnColor?: string
+    headBorderColor?: string
+    weekDayNameColor?: string
+    weekDayNameBg?: string
+    dayBgColor?: string
+    dayTextColor?: string
+    currentDayText?: string
+    currentDayBg?: string
+    todayBg?: string
+    todayTxtColor?: string
+    holidayText?: string
+    holidayBg?: string
+  }
 }
 
 interface Week {

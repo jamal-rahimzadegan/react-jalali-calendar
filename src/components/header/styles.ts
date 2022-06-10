@@ -5,15 +5,18 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-around;
   padding: 10px 0;
-  border-bottom: ${({ lookAndFeel, theme }) =>
-    `1px solid ${lookAndFeel.headBorderColor || theme.BORDER}`};
-
+  font-weight: bold;
+  color: ${({ lookAndFeel: { colors } }) => colors.headTitleColor};
   button {
     cursor: pointer;
-    color: ${({ lookAndFeel }) => lookAndFeel.headTitleColor};
-    background: ${({ lookAndFeel }) =>
-      lookAndFeel.headBtnColor || 'transparent'};
+    background: ${({ lookAndFeel: { colors } }) =>
+      colors.headBtnColor || 'transparent'};
   }
 `
 
 export { StyledHeader }
+// border-bottom: ${({ colors, theme }) =>
+//   `1px solid ${colors.headBorderColor || theme.BORDER}`};
+
+// font-family: ${({ lookAndFeel: { fontFamily = 'iranyekan' } }) =>
+// fontFamily};
