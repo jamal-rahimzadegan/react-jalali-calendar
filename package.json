@@ -12,8 +12,10 @@
     "node": ">=10"
   },
   "scripts": {
+    "start-lib": "microbundle-crl watch --no-compress --format modern,cjs",
+    "start-example": "npm start --prefix example",
+    "start-all": "npm-run-all --parallel start-lib start-example",
     "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start-package": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
