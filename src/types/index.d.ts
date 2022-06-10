@@ -26,6 +26,7 @@ interface CurrentDate {
 interface StyleObject {
   headTitleColor?: string
   headBtnColor?: string
+  headBorderColor?: string
   weekDayNameColor?: string
   weekDayNameBg?: string
   dayBgColor?: string

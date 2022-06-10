@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  transition: background 600ms;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}

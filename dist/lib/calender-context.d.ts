@@ -10,7 +10,7 @@ interface CalenderSharedItems {
     setSelectedDay?: Function;
     selectMethod?: DaySelectType;
     onSelect?: (day: DateItem) => void;
-    style: StyleObject;
+    lookAndFeel: StyleObject;
 }
 declare const CalenderContext: Context<CalenderSharedItems>;
 export default CalenderContext;

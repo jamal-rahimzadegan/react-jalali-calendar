@@ -1,104 +1,30 @@
-:root {
-  --accent: #273c75;
-}
-
-/*$text-first: #d2d2d2;*/
-/*$Transparent: transparent;*/
-/*$holiday-bg: #473938;*/
-/*$holiday-txt: #e56c6e;*/
-/*$normal-day-bg: #3f3f3f;*/
-/*$today-bg: #2a2a2a;*/
-/*$border: #414141;*/
-
-._style__calender__dpYGv {
-  /*background: var(--accent);*/
-  direction: rtl;
-  overflow: hidden;
-  width: 100%;
-  color: #d2d2d2;
+* {
   box-sizing: border-box;
 }
 
-._style__calender__header__2gr8n {
-  color: #d2d2d2;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 10px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #414141;
+html, body {
+  transition: background 600ms;
 }
 
-._style__calender__header__2gr8n button {
-  background: #3f3f3f;
-  width: 40px;
-  height: 40px;
-  border-radius: 15px;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+p {
+  margin: 0;
 }
 
-._style__calender__header__2gr8n p {
-  font-weight: bold;
-  font-size: 1.1rem;
-  min-width: 150px;
-  text-align: center;
-}
-
-._style__calender__dpYGv table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 2px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-._style__calender__dpYGv table thead td {
-  text-align: center;
-  font-size: 3.1vw;
-  padding: 10px 0;
-  margin: 10px;
-}
-
-._style__calender__dpYGv table tbody td {
-  padding: 10px 0;
-  margin: 5px;
-  cursor: pointer;
-  border-radius: 10px;
-  text-align: center;
-}
-
-._style__calender__day-animate__3_TKx {
+button {
   background: transparent;
-  -webkit-animation: _style__animate-bg-color__3gGnX 200ms forwards;
-          animation: _style__animate-bg-color__3gGnX 200ms forwards;
+  border: none;
+  outline: none;
 }
 
-@-webkit-keyframes _style__animate-bg-color__3gGnX {
-  from {
-    background-color: transparent;
-  }
-  to {
-    background-color: #273c75;
-  }
+:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 transparent !important;
 }
 
-@keyframes _style__animate-bg-color__3gGnX {
-  from {
-    background-color: transparent;
-  }
-  to {
-    background-color: #273c75;
-  }
-}
-
-._fake__x__3chvQ {
-  background: red;
-}
-
-._fake-module__x__15g3b {
-  background: red;
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
 }
 
 :root {
@@ -123,25 +49,9 @@
 }
 
 ._style-module__calender__header__1jeFP {
-  color: #d2d2d2;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 10px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #414141;
+
 }
 
-._style-module__calender__header__1jeFP button {
-  background: #3f3f3f;
-  width: 40px;
-  height: 40px;
-  border-radius: 15px;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 ._style-module__calender__header__1jeFP p {
   font-weight: bold;
@@ -194,4 +104,33 @@
   to {
     background-color: #273c75;
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  transition: background 600ms;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
 }

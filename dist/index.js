@@ -2,7 +2,11 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
+var styled = require('styled-components');
+var styled__default = _interopDefault(styled);
 var jalaali = _interopDefault(require('jalaali-js'));
+
+var CalenderContext = React.createContext({});
 
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
@@ -22,6 +26,28 @@ function _createClass(Constructor, protoProps, staticProps) {
   });
   return Constructor;
 }
+
+function _taggedTemplateLiteralLoose(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  strings.raw = raw;
+  return strings;
+}
+
+var _templateObject;
+var StyledHeader = styled__default.header(_templateObject || (_templateObject = _taggedTemplateLiteralLoose(["\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n  padding: 10px 0;\n  border-bottom: ", ";\n\n  button {\n    cursor: pointer;\n    color: ", ";\n    background: ", ";\n  }\n"])), function (_ref) {
+  var lookAndFeel = _ref.lookAndFeel,
+      theme = _ref.theme;
+  return "1px solid " + (lookAndFeel.headBorderColor || theme.BORDER);
+}, function (_ref2) {
+  var lookAndFeel = _ref2.lookAndFeel;
+  return lookAndFeel.headTitleColor;
+}, function (_ref3) {
+  var lookAndFeel = _ref3.lookAndFeel;
+  return lookAndFeel.headBtnColor || 'transparent';
+});
 
 var COLORS;
 
@@ -139,17 +165,13 @@ var PersianDateTools = /*#__PURE__*/function () {
 
 var perDate = PersianDateTools.getSingletonInstance();
 
-var CalenderContext = React.createContext({});
-
-var styles = {"calender":"_style-module__calender__2AoEL","calender__header":"_style-module__calender__header__1jeFP","calender__day-animate":"_style-module__calender__day-animate__3BSPf","animate-bg-color":"_style-module__animate-bg-color__2pQ6c"};
-
-function CalenderHeader() {
+function Header() {
   var _useContext = React.useContext(CalenderContext),
       year = _useContext.year,
       month = _useContext.month,
       setMonth = _useContext.setMonth,
       setYear = _useContext.setYear,
-      style = _useContext.style;
+      lookAndFeel = _useContext.lookAndFeel;
 
   var changeMonth = function changeMonth(action) {
     if (action === 'prev') {
@@ -167,26 +189,14 @@ function CalenderHeader() {
     }
   };
 
-  return React__default.createElement("div", {
-    className: styles.calender__header
+  return React__default.createElement(StyledHeader, {
+    lookAndFeel: lookAndFeel
   }, React__default.createElement("button", {
-    style: {
-      color: style.headTitleColor,
-      background: style.headBtnColor
-    },
     onClick: function onClick() {
       return changeMonth('prev');
     },
     children: "\u2039"
-  }), React__default.createElement("p", {
-    style: {
-      color: style.headTitleColor
-    }
-  }, perDate.getMonthNameByNumber(month), " ", year), React__default.createElement("button", {
-    style: {
-      color: style.headTitleColor,
-      background: style.headBtnColor
-    },
+  }), React__default.createElement("p", null, perDate.getMonthNameByNumber(month), " ", year), React__default.createElement("button", {
     onClick: function onClick() {
       return changeMonth('next');
     },
@@ -204,16 +214,16 @@ function RenderDays(props) {
       selectedDay = _useContext.selectedDay,
       setSelectedDay = _useContext.setSelectedDay,
       onSelect = _useContext.onSelect,
-      style = _useContext.style;
+      lookAndFeel = _useContext.lookAndFeel;
 
-  var currentDayBg = style.currentDayBg,
-      dayTextColor = style.dayTextColor,
-      holidayText = style.holidayText,
-      holidayBg = style.holidayBg,
-      currentDayText = style.currentDayText,
-      dayBgColor = style.dayBgColor,
-      todayBg = style.todayBg,
-      todayTxtColor = style.todayTxtColor;
+  var currentDayBg = lookAndFeel.currentDayBg,
+      dayTextColor = lookAndFeel.dayTextColor,
+      holidayText = lookAndFeel.holidayText,
+      holidayBg = lookAndFeel.holidayBg,
+      currentDayText = lookAndFeel.currentDayText,
+      dayBgColor = lookAndFeel.dayBgColor,
+      todayBg = lookAndFeel.todayBg,
+      todayTxtColor = lookAndFeel.todayTxtColor;
 
   var checkIfSelectedDay = function checkIfSelectedDay(dayValue) {
     if (!dayValue) return false;
@@ -226,7 +236,7 @@ function RenderDays(props) {
     if (perDate.isFriday(dayInWeek)) return holidayText || COLORS.HOLIDAY_BG;else return dayTextColor || COLORS.TXT_FIRST;
   };
 
-  var applyBgColor = function applyBgColor(dayValue, dayInWeek) {
+  var applyDyBgColor = function applyDyBgColor(dayValue, dayInWeek) {
     var HOLIDAY_BG = COLORS.HOLIDAY_BG,
         TODAY_BG = COLORS.TODAY_BG,
         TRANSPARENT = COLORS.TRANSPARENT,
@@ -248,7 +258,7 @@ function RenderDays(props) {
       dayNumber: dayValue,
       dayLabel: Object.values(WEEK_DAYS)[dayInWeek]
     };
-    if (selectMethod === 'single') selectionInfo = pickSingleDay(clickedDayInfo);
+    if (selectMethod === "single") selectionInfo = pickSingleDay(clickedDayInfo);
 
     onSelect(selectionInfo);
   };
@@ -258,17 +268,17 @@ function RenderDays(props) {
     return clickedDayInfo;
   };
 
-  return React__default.createElement("tr", null, Object.entries(week).map(function (_ref) {
+  return React__default.createElement("tr", null, Object.entries(week).map(function (_ref, i) {
     var dayInWeek = _ref[0],
         dayValue = _ref[1];
     return React__default.createElement("td", {
-      key: dayValue,
+      key: dayValue || dayInWeek + ("" + i),
       onClick: function onClick() {
         return handleDayClick(dayValue, +dayInWeek);
       },
       style: {
         color: applyDayTxtColor(+dayInWeek, dayValue),
-        backgroundColor: applyBgColor(dayValue, +dayInWeek)
+        backgroundColor: applyDyBgColor(dayValue, +dayInWeek)
       }
     }, dayValue);
   }));
@@ -282,11 +292,26 @@ function generateArr(length, formatArr) {
   });
 }
 
+var styles = {"calender":"_style-module__calender__2AoEL","calender__header":"_style-module__calender__header__1jeFP","calender__day-animate":"_style-module__calender__day-animate__3BSPf","animate-bg-color":"_style-module__animate-bg-color__2pQ6c"};
+
+var COLORS$1;
+
+(function (COLORS) {
+  COLORS["TXT_FIRST"] = "#D2D2D2";
+  COLORS["TRANSPARENT"] = "transparent";
+  COLORS["ACCENT"] = "#273c75";
+  COLORS["HOLIDAY_BG"] = "#473938";
+  COLORS["HOLIDAY_TXT"] = "#E56C6E";
+  COLORS["NORMAL_DAY_BG"] = "#3F3F3F";
+  COLORS["TODAY_BG"] = "#2a2a2a";
+  COLORS["BORDER"] = "#414141";
+})(COLORS$1 || (COLORS$1 = {}));
+
 function Calendar(props) {
   var onSelect = props.onSelect,
       style = props.style,
       _props$className = props.className,
-      className = _props$className === void 0 ? '' : _props$className;
+      className = _props$className === void 0 ? "" : _props$className;
   var currentDate = perDate.currentDate;
 
   var _useState = React.useState(currentDate.year),
@@ -305,7 +330,7 @@ function Calendar(props) {
       daysRange = _useState4[0],
       setDaysRange = _useState4[1];
 
-  var selectMethod = 'single';
+  var selectMethod = "single";
   var monthLength = perDate.getMonthLength(year, month);
   var firstDayOfMonth = perDate.getFirstDayOfMonth(year, month);
   var calenderRowWeek = firstDayOfMonth > 4 ? 6 : 5;
@@ -351,17 +376,19 @@ function Calendar(props) {
     setMonth: setMonth,
     setYear: setYear,
     onSelect: onSelect,
-    style: style
+    lookAndFeel: style
   };
   React.useEffect(resetSelectedDay, [month, year]);
-  return React__default.createElement(CalenderContext.Provider, {
+  return React__default.createElement(styled.ThemeProvider, {
+    theme: COLORS$1
+  }, React__default.createElement(CalenderContext.Provider, {
     value: sharedItems
-  }, React__default.createElement(CalenderHeader, null), React__default.createElement("div", {
-    className: styles.calender + ' ' + className
+  }, React__default.createElement(Header, null), React__default.createElement("div", {
+    className: styles.calender + " " + className
   }, React__default.createElement("table", null, React__default.createElement("thead", null, React__default.createElement("tr", {
     style: {
       color: style.weekDayNameColor,
-      background: style.weekDayNameBg || 'transparent'
+      background: style.weekDayNameBg || "transparent"
     }
   }, Object.values(WEEK_DAYS).map(function (dayItem) {
     return React__default.createElement("td", {
@@ -373,7 +400,7 @@ function Calendar(props) {
     }, React__default.createElement(RenderDays, {
       week: week
     }));
-  })))));
+  }))))));
 }
 
 exports.Calendar = Calendar;

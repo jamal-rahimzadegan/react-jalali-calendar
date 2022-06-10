@@ -1,5 +1,31 @@
 import React, { createContext, useContext, useState, useEffect, Fragment } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import jalaali from 'jalaali-js';
+
+const CalenderContext = createContext({});
+
+let _ = t => t,
+    _t;
+const StyledHeader = styled.header(_t || (_t = _`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-bottom: ${0};
+
+  button {
+    cursor: pointer;
+    color: ${0};
+    background: ${0};
+  }
+`), ({
+  lookAndFeel,
+  theme
+}) => `1px solid ${lookAndFeel.headBorderColor || theme.BORDER}`, ({
+  lookAndFeel
+}) => lookAndFeel.headTitleColor, ({
+  lookAndFeel
+}) => lookAndFeel.headBtnColor || 'transparent');
 
 var COLORS;
 
@@ -111,17 +137,13 @@ class PersianDateTools {
 
 var perDate = PersianDateTools.getSingletonInstance();
 
-const CalenderContext = createContext({});
-
-var styles = {"calender":"_style-module__calender__2AoEL","calender__header":"_style-module__calender__header__1jeFP","calender__day-animate":"_style-module__calender__day-animate__3BSPf","animate-bg-color":"_style-module__animate-bg-color__2pQ6c"};
-
-function CalenderHeader() {
+function Header() {
   const {
     year,
     month,
     setMonth,
     setYear,
-    style
+    lookAndFeel
   } = useContext(CalenderContext);
 
   const changeMonth = action => {
@@ -140,24 +162,12 @@ function CalenderHeader() {
     }
   };
 
-  return React.createElement("div", {
-    className: styles.calender__header
+  return React.createElement(StyledHeader, {
+    lookAndFeel: lookAndFeel
   }, React.createElement("button", {
-    style: {
-      color: style.headTitleColor,
-      background: style.headBtnColor
-    },
     onClick: () => changeMonth('prev'),
     children: '\u2039'
-  }), React.createElement("p", {
-    style: {
-      color: style.headTitleColor
-    }
-  }, perDate.getMonthNameByNumber(month), " ", year), React.createElement("button", {
-    style: {
-      color: style.headTitleColor,
-      background: style.headBtnColor
-    },
+  }), React.createElement("p", null, perDate.getMonthNameByNumber(month), " ", year), React.createElement("button", {
     onClick: () => changeMonth('next'),
     children: '\u203A'
   }));
@@ -174,7 +184,7 @@ function RenderDays(props) {
     selectedDay,
     setSelectedDay,
     onSelect,
-    style
+    lookAndFeel
   } = useContext(CalenderContext);
   const {
     currentDayBg,
@@ -185,7 +195,7 @@ function RenderDays(props) {
     dayBgColor,
     todayBg,
     todayTxtColor
-  } = style;
+  } = lookAndFeel;
 
   const checkIfSelectedDay = dayValue => {
     if (!dayValue) return false;
@@ -198,7 +208,7 @@ function RenderDays(props) {
     if (perDate.isFriday(dayInWeek)) return holidayText || COLORS.HOLIDAY_BG;else return dayTextColor || COLORS.TXT_FIRST;
   };
 
-  const applyBgColor = (dayValue, dayInWeek) => {
+  const applyDyBgColor = (dayValue, dayInWeek) => {
     const {
       HOLIDAY_BG,
       TODAY_BG,
@@ -222,7 +232,7 @@ function RenderDays(props) {
       dayNumber: dayValue,
       dayLabel: Object.values(WEEK_DAYS)[dayInWeek]
     };
-    if (selectMethod === 'single') selectionInfo = pickSingleDay(clickedDayInfo);
+    if (selectMethod === "single") selectionInfo = pickSingleDay(clickedDayInfo);
 
     onSelect(selectionInfo);
   };
@@ -232,12 +242,12 @@ function RenderDays(props) {
     return clickedDayInfo;
   };
 
-  return React.createElement("tr", null, Object.entries(week).map(([dayInWeek, dayValue]) => React.createElement("td", {
-    key: dayValue,
+  return React.createElement("tr", null, Object.entries(week).map(([dayInWeek, dayValue], i) => React.createElement("td", {
+    key: dayValue || dayInWeek + `${i}`,
     onClick: () => handleDayClick(dayValue, +dayInWeek),
     style: {
       color: applyDayTxtColor(+dayInWeek, dayValue),
-      backgroundColor: applyBgColor(dayValue, +dayInWeek)
+      backgroundColor: applyDyBgColor(dayValue, +dayInWeek)
     }
   }, dayValue)));
 }
@@ -248,11 +258,26 @@ function generateArr(length, formatArr) {
   }, (v, k) => !!formatArr && formatArr(v, k));
 }
 
+var styles = {"calender":"_style-module__calender__2AoEL","calender__header":"_style-module__calender__header__1jeFP","calender__day-animate":"_style-module__calender__day-animate__3BSPf","animate-bg-color":"_style-module__animate-bg-color__2pQ6c"};
+
+var COLORS$1;
+
+(function (COLORS) {
+  COLORS["TXT_FIRST"] = "#D2D2D2";
+  COLORS["TRANSPARENT"] = "transparent";
+  COLORS["ACCENT"] = "#273c75";
+  COLORS["HOLIDAY_BG"] = "#473938";
+  COLORS["HOLIDAY_TXT"] = "#E56C6E";
+  COLORS["NORMAL_DAY_BG"] = "#3F3F3F";
+  COLORS["TODAY_BG"] = "#2a2a2a";
+  COLORS["BORDER"] = "#414141";
+})(COLORS$1 || (COLORS$1 = {}));
+
 function Calendar(props) {
   const {
     onSelect,
     style,
-    className = ''
+    className = ""
   } = props;
   const {
     currentDate
@@ -261,7 +286,7 @@ function Calendar(props) {
   const [month, setMonth] = useState(currentDate.month.number);
   const [selectedDay, setSelectedDay] = useState({});
   const [daysRange, setDaysRange] = useState({});
-  const selectMethod = 'single';
+  const selectMethod = "single";
   const monthLength = perDate.getMonthLength(year, month);
   const firstDayOfMonth = perDate.getFirstDayOfMonth(year, month);
   const calenderRowWeek = firstDayOfMonth > 4 ? 6 : 5;
@@ -299,17 +324,19 @@ function Calendar(props) {
     setMonth,
     setYear,
     onSelect,
-    style
+    lookAndFeel: style
   };
   useEffect(resetSelectedDay, [month, year]);
-  return React.createElement(CalenderContext.Provider, {
+  return React.createElement(ThemeProvider, {
+    theme: COLORS$1
+  }, React.createElement(CalenderContext.Provider, {
     value: sharedItems
-  }, React.createElement(CalenderHeader, null), React.createElement("div", {
-    className: styles.calender + ' ' + className
+  }, React.createElement(Header, null), React.createElement("div", {
+    className: styles.calender + " " + className
   }, React.createElement("table", null, React.createElement("thead", null, React.createElement("tr", {
     style: {
       color: style.weekDayNameColor,
-      background: style.weekDayNameBg || 'transparent'
+      background: style.weekDayNameBg || "transparent"
     }
   }, Object.values(WEEK_DAYS).map(dayItem => React.createElement("td", {
     key: dayItem
@@ -317,7 +344,7 @@ function Calendar(props) {
     key: i + Math.random()
   }, React.createElement(RenderDays, {
     week: week
-  })))))));
+  }))))))));
 }
 
 export { Calendar };

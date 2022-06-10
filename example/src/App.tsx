@@ -7,23 +7,24 @@ export default function App() {
     <Calendar
       onSelect={console.table}
       style={{
-        headTitleColor: 'orange',
-        headBtnColor: 'red',
-
-        weekDayNameColor: 'blue',
-        weekDayNameBg: 'navy',
-
-        todayBg: 'yellow',
-        todayTxtColor: 'red',
-
-        holidayBg: 'red',
-        holidayText: 'white',
-
-        currentDayBg: 'lime',
-        currentDayText: 'blue',
-
-        dayBgColor: 'brown',
-        dayTextColor: 'blue'
+        // headBorderColor:"red"
+        // headTitleColor: 'orange',
+        // headBtnColor: 'red',
+        //
+        // weekDayNameColor: 'blue',
+        // weekDayNameBg: 'navy',
+        //
+        // todayBg: 'yellow',
+        // todayTxtColor: 'red',
+        //
+        // holidayBg: 'red',
+        // holidayText: 'white',
+        //
+        // currentDayBg: 'lime',
+        // currentDayText: 'blue',
+        //
+        // dayBgColor: 'brown',
+        // dayTextColor: 'blue'
       }}
     />
   )

@@ -20,25 +20,9 @@
 }
 
 .calender__header {
-  color: #d2d2d2;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 10px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #414141;
+
 }
 
-.calender__header button {
-  background: #3f3f3f;
-  width: 40px;
-  height: 40px;
-  border-radius: 15px;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .calender__header p {
   font-weight: bold;

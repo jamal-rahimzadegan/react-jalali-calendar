@@ -1,6 +1,6 @@
 //@ts-nocheck
 import jalaali, { JalaaliDateObject } from 'jalaali-js'
-import { PERSIAN_MONTH } from './constants'
+import { PERSIAN_MONTH } from '../constant'
 
 class PersianDateTools {
   private readonly locale: 'fa' | 'en'

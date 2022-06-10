@@ -11,7 +11,7 @@ interface CalenderSharedItems {
   setSelectedDay?: Function
   selectMethod?: DaySelectType
   onSelect?: (day: DateItem) => void
-  style: StyleObject
+  lookAndFeel: StyleObject
 }
 
 // @ts-ignore

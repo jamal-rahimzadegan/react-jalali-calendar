@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "tools/*": ["tools/*"],
+      "assets/*": ["assets/*"],
+      "config/*": ["config/*"],
+      "components/*": ["components/*"],
+      "lib/*": ["lib/*"],
+      "hooks/*": ["hooks/*"],
+      "services/*": ["services/*"],
+      "constant/*": ["constant/*"],
+      "models/*": ["models/*"],
+      "utils/*": ["utils/*"],
+      "theme/*": ["theme/*"]
+    }
+  }
+}
