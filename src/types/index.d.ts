@@ -23,43 +23,6 @@ interface CurrentDate {
   day: { number: number; name: string }
 }
 
-interface StyleObject {
-  fontFamily?: string
-  colors: {
-    headTitleColor?: string
-    headBtnColor?: string
-    headBorderColor?: string
-    weekDayNameColor?: string
-    weekDayNameBg?: string
-    dayBgColor?: string
-    dayTextColor?: string
-    currentDayText?: string
-    currentDayBg?: string
-    todayBg?: string
-    todayTxtColor?: string
-    holidayText?: string
-    holidayBg?: string
-  }
-}
-
-interface Week {
-  [key: number]: number
-
-  // @ts-ignore
-  [key: number]: number
-  // @ts-ignore
-
-  [key: number]: number
-  // @ts-ignore
-
-  [key: number]: number
-  // @ts-ignore
-
-  [key: number]: number
-  // @ts-ignore
-
-  [key: number]: number
-  // @ts-ignore
-
-  [key: number]: number
+type Week = {
+  [K in 0 | 1 | 2 | 3 | 4 | 5 | 6]?: number
 }

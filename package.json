@@ -64,11 +64,7 @@
   "files": [
     "dist"
   ],
-  "resolutions": {
-    "styled-components": "^5"
-  },
   "dependencies": {
-    "jalaali-js": "^1.2.6",
-    "styled-components": "^5.3.5"
+    "jalaali-js": "^1.2.6"
   }
 }

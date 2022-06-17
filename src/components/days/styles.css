@@ -1,0 +1,37 @@
+.calendar {
+}
+
+.calendarDayContainer {
+  table-layout: fixed;
+  direction: rtl;
+  overflow: hidden;
+  color: #d2d2d2;
+  box-sizing: border-box;
+  width: 100%;
+  border-collapse: separate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.calendarDays {
+  text-align: center;
+  height: 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  color: black; //Todo: fix it
+}
+
+.calendarDayNumber {
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+  height: calc(100vw / 7);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+}

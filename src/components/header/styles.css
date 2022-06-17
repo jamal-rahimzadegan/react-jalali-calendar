@@ -1,0 +1,12 @@
+.calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.calendar__header button {
+  cursor: pointer !important;
+  background: transparent;
+}

@@ -11,7 +11,9 @@ interface CalenderSharedItems {
   setSelectedDay?: Function
   selectMethod?: DaySelectType
   onSelect?: (day: DateItem) => void
-  lookAndFeel: StyleObject
+  changeMonth: (action: MonthSwitchType) => void
+  currentMonth: string
+  currentYear: string
 }
 
 // @ts-ignore

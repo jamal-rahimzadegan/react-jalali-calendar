@@ -1,0 +1,124 @@
+._components__calendar__1VLXp {
+}
+
+._components__calendar__header__39gS6 {
+  background: red;
+}
+
+._styles__calendar__CUfl- {
+}
+
+._styles__calendarDayContainer__3EYbd {
+  table-layout: fixed;
+  direction: rtl;
+  overflow: hidden;
+  color: #d2d2d2;
+  box-sizing: border-box;
+  width: 100%;
+  border-collapse: separate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+._styles__calendarDays__fdW1c {
+  text-align: center;
+  height: 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  color: black; //Todo: fix it
+}
+
+._styles__calendarDayNumber__1Q1WA {
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+  height: calc(100vw / 7);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+._styles__calendar__3ql79 {
+}
+
+._styles__calendarDayContainer__3L-TC {
+  table-layout: fixed;
+  direction: rtl;
+  overflow: hidden;
+  color: #d2d2d2;
+  box-sizing: border-box;
+  width: 100%;
+  border-collapse: separate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+._styles__calendarDays__2oWKM {
+  text-align: center;
+  height: 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  color: black; //Todo: fix it
+}
+
+._styles__calendarDayNumber__2_d8u {
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+  height: calc(100vw / 7);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+._styles__calendar__header__19Y7f {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+._styles__calendar__header__19Y7f button {
+  cursor: pointer !important;
+  background: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  transition: background 600ms;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}

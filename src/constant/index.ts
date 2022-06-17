@@ -5,13 +5,13 @@ const REGEX = {
 }
 
 enum COLORS {
-  TXT_FIRST = '#D2D2D2',
+  TXT = '#000',
   TRANSPARENT = 'transparent',
   ACCENT = '#273c75',
-  HOLIDAY_BG = '#473938',
-  HOLIDAY_TXT = '#E56C6E',
-  NORMAL_DAY_BG = '#3F3F3F',
-  TODAY_BG = '#2a2a2a',
+  HOLIDAY_BG = '#F24919',
+  HOLIDAY_TXT = '#290000',
+  NORMAL_DAY_BG = '#bcbcbc',
+  TODAY_BG = '#666666',
   BORDER = '#414141'
 }
 
@@ -19,7 +19,7 @@ enum WEEK_DAYS {
   'Saturday' = 'شنبه',
   'Sunday' = 'یکشنبه',
   'Monday' = 'دوشنبه',
-  'Tuesday' = 'سه شنبه',
+  'Tuesday' = 'سەشنبە',
   'Wednesday' = 'چهارشنبه',
   'Thursday' = 'پنجشنبه',
   'Friday' = 'جمعه'
@@ -40,4 +40,4 @@ enum PERSIAN_MONTH {
   اسفند
 }
 
-export { REGEX, COLORS,WEEK_DAYS, PERSIAN_MONTH }
+export { REGEX, COLORS, WEEK_DAYS, PERSIAN_MONTH }

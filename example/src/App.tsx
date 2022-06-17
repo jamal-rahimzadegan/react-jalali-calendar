@@ -6,29 +6,24 @@ export default function App() {
   return (
     <Calendar
       onSelect={console.table}
-      style={{
-        // fontFamily: 'arial',
-        colors: {
-          headBorderColor: 'red',
-          headTitleColor: 'blue',
-          headBtnColor: 'red'
-          //
-          // weekDayNameColor: 'blue',
-          // weekDayNameBg: 'navy',
-          //
-          // todayBg: 'yellow',
-          // todayTxtColor: 'red',
-          //
-          // holidayBg: 'red',
-          // holidayText: 'white',
-          //
-          // currentDayBg: 'lime',
-          // currentDayText: 'blue',
-          //
-          // dayBgColor: 'brown',
-          // dayTextColor: 'blue'
-        }
-      }}
+      // customHeader={(props) => {
+      //   console.log(`--- props.updateMonth ----> `, props)
+      //
+      //   return (
+      //     <div
+      //       style={{
+      //         background: 'red',
+      //         display: 'flex',
+      //         justifyContent: 'space-between',
+      //         width: '100%'
+      //       }}
+      //     >
+      //       <p onClick={() => props.gotToNextMonth()}>بعدی</p>
+      //       {props.activeDate.year} {props.activeDate.month}
+      //       <p onClick={() => props.gotToPrevMonth()}>قبلی</p>
+      //     </div>
+      //   )
+      // }}
     />
   )
 }

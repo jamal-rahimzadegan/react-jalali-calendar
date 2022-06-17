@@ -1,25 +1,28 @@
-// @ts-nocheck
-import React, { Fragment, useEffect, useState } from 'react'
-import { ThemeProvider } from 'styled-components'
-import Header from './components/header/Header'
+import React, { useEffect, useState } from 'react'
 import CalenderContext from './lib/calender-context'
-import RenderDays from './components/RenderDays'
 import perDate from './tools/persian-date-tools'
-import { WEEK_DAYS } from './constant'
+import DaysBox from './components/days/DaysBox'
+import Header from './components/header/Header'
 import { generateArr } from './utils'
-import styles from './lib/style.module.css'
-import { COLORS } from './theme/colors'
 import './assets/styles/index.css'
-import { GlobalStyle } from 'assets/styles/global-style'
+import { numberTools } from './tools'
+
+interface HeaderProps {
+  gotToNextMonth: Function
+  gotToPrevMonth: Function
+  activeDate: {
+    month: string
+    year: string
+  }
+}
 
 interface Props {
   onSelect: (day: DateItem) => void
-  style?: StyleObject
-  className?: string
+  customHeader?: (headerProps) => JSX.Element
 }
 
 export function Calendar(props: Props): JSX.Element {
-  const { onSelect, style, className = '' } = props
+  const { onSelect, customHeader } = props
   const { currentDate } = perDate
   const [year, setYear] = useState<number>(currentDate.year)
   const [month, setMonth] = useState<number>(currentDate.month.number)
@@ -28,16 +31,10 @@ export function Calendar(props: Props): JSX.Element {
   const selectMethod: DaySelectType = 'single'
   const monthLength: number = perDate.getMonthLength(year, month)
   const firstDayOfMonth: number = perDate.getFirstDayOfMonth(year, month)
-  const calenderRowWeek = firstDayOfMonth > 4 ? 6 : 5 // 4 === Wednesday
+  const numberOfRows: 5 | 6 = firstDayOfMonth > 4 ? 6 : 5 // 4 === Wednesday
 
   const generateCalenderWeeks = (): (() => Week[]) => {
     let currentDay: number = 1
-
-    const getDayValue = (weekDayNumber: number, i: number): number => {
-      if (currentDay > monthLength) return
-      if (i !== 0) return currentDay++
-      if (i === 0 && weekDayNumber >= firstDayOfMonth) return currentDay++
-    }
 
     const createWeekData = (i) => {
       const data = {}
@@ -45,13 +42,38 @@ export function Calendar(props: Props): JSX.Element {
       return data
     }
 
-    return () =>
-      generateArr(calenderRowWeek).map((item: Week, i) => createWeekData(i))
+    const getDayValue = (weekDayNumber: number, i: number): number => {
+      if (currentDay > monthLength) return
+      if (i !== 0) return currentDay++
+      if (i === 0 && weekDayNumber >= firstDayOfMonth) return currentDay++
+    }
+
+    return () => {
+      return generateArr(numberOfRows).map((item: Week, i) => createWeekData(i))
+    }
   }
 
   const calenderWeekList = generateCalenderWeeks()
 
   const resetSelectedDay = () => selectMethod === 'single' && setSelectedDay({})
+
+  const changeMonth = (action: MonthSwitchType) => {
+    if (action === 'prev') {
+      if (month >= 2) return setMonth(month - 1)
+      else {
+        setYear(year - 1)
+        setMonth(12)
+      }
+    }
+
+    if (action === 'next') {
+      if (month <= 11) return setMonth(month + 1)
+      else {
+        setYear(year + 1)
+        setMonth(1)
+      }
+    }
+  }
 
   const sharedItems = {
     year,
@@ -64,40 +86,26 @@ export function Calendar(props: Props): JSX.Element {
     setMonth,
     setYear,
     onSelect,
-    lookAndFeel: style
+    changeMonth,
+    currentMonth: perDate.getMonthNameByNumber(month),
+    currentYear: numberTools.toPersian(year)
+  }
+
+  const headerProps: HeaderProps = {
+    gotToNextMonth: () => changeMonth('next'),
+    gotToPrevMonth: () => changeMonth('prev'),
+    activeDate: {
+      month: sharedItems.currentMonth,
+      year: sharedItems.currentYear
+    }
   }
 
   useEffect(resetSelectedDay, [month, year])
 
   return (
-    <ThemeProvider theme={COLORS}>
-      <GlobalStyle />
-      <CalenderContext.Provider value={sharedItems}>
-        <Header />
-        <div className={styles.calender + ' ' + className}>
-          <table>
-            <thead>
-              <tr
-                style={{
-                  color: style.weekDayNameColor,
-                  background: style.weekDayNameBg || 'transparent'
-                }}
-              >
-                {Object.values(WEEK_DAYS).map((dayItem) => (
-                  <td key={dayItem}>{dayItem}</td>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {calenderWeekList().map((week, i) => (
-                <Fragment key={i + Math.random()}>
-                  <RenderDays week={week} />
-                </Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </CalenderContext.Provider>
-    </ThemeProvider>
+    <CalenderContext.Provider value={sharedItems}>
+      {customHeader ? customHeader(headerProps) : <Header />}
+      <DaysBox calenderWeekList={calenderWeekList()} />
+    </CalenderContext.Provider>
   )
 }
