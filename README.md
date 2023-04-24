@@ -22,10 +22,7 @@ export default function App() {
   return (
     <Calendar
       onSelect={console.table}
-      style={{
-
-
-      }}
+      style={{...}}
     />
   )
 }
